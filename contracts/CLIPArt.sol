@@ -21,6 +21,7 @@ contract CLIPArt is ERC721URIStorage {
 
   function paint(string memory paintPrompt) public returns (uint256) {
     require(_tokenIds.current() < _maxNumberOfPieces, "All pieces have already been minted.");
+    // TODO: only allow an address to mint a certain number of pieces
 
     _tokenIds.increment();
     uint256 newId = _tokenIds.current();
