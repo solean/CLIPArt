@@ -15,7 +15,7 @@ async function main() {
 
   // We get the contract to deploy
   const CLIPArt = await hre.ethers.getContractFactory("CLIPArt");
-  const clipArt = await CLIPArt.deploy(100);
+  const clipArt = await CLIPArt.deploy(100, 3);
 
   await clipArt.deployed();
 

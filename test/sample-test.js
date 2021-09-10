@@ -13,7 +13,10 @@ describe("CLIPArt paint", function () {
     CLIPArt = await ethers.getContractFactory("CLIPArt");
     [owner, addr1, addr2, ...addrs] = await ethers.getSigners();
 
-    hardhatContract = await CLIPArt.deploy(5);
+    const maxTotal = 5;
+    const maxPerAddress = 2;
+
+    hardhatContract = await CLIPArt.deploy(maxTotal, maxPerAddress);
   });
 
   describe("Deployment", function() {
@@ -46,16 +49,24 @@ describe("CLIPArt paint", function () {
       expect(tokenURI).to.equal("http://localhost:8080/test/1");
     });
 
-    it("Should not allow more than the max number of mints.", async function() {
+    it("Should not allow more than the max number of total mints.", async function() {
       await hardhatContract.paint();
-      await hardhatContract.paint();
-      await hardhatContract.paint();
+      await hardhatContract.connect(addr1).paint();
+      await hardhatContract.connect(addr2).paint();
+      await hardhatContract.connect(addrs[0]).paint();
+      await hardhatContract.connect(addrs[1]).paint();
+      await expect(
+        hardhatContract.connect(addrs[2]).paint()
+      ).to.be.revertedWith("All pieces have already been minted.");
+    });
+
+    it("Should not allow more than the max number of mints per address.", async function() {
       await hardhatContract.paint();
       await hardhatContract.paint();
 
       await expect(
         hardhatContract.paint()
-      ).to.be.revertedWith("All pieces have already been minted.");
+      ).to.be.revertedWith("You have already minted the max number of pieces per address.");
     });
   });
 });

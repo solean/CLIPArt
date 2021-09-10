@@ -9,19 +9,21 @@ contract CLIPArt is ERC721URIStorage {
   using Counters for Counters.Counter;
   Counters.Counter private _tokenIds;
   uint256 public _maxNumberOfPieces;
+  uint8 public _maxNumberOfPiecesPerAddress;
 
 
-  constructor(uint256 maxNumberOfPieces) ERC721("CLIPArt", "CLIP") {
+  constructor(uint256 maxNumberOfPieces, uint8 maxNumberOfPiecesPerAddress) ERC721("CLIPArt", "CLIP") {
     _maxNumberOfPieces = maxNumberOfPieces;
+    _maxNumberOfPiecesPerAddress = maxNumberOfPiecesPerAddress;
   }
 
   function _baseURI() internal view virtual override returns (string memory) {
     return "http://localhost:8080/test/";
   }
 
-  function paint(string memory paintPrompt) public returns (uint256) {
+  function paint(/*string memory paintPrompt*/) public returns (uint256) {
     require(_tokenIds.current() < _maxNumberOfPieces, "All pieces have already been minted.");
-    // TODO: only allow an address to mint a certain number of pieces
+    require(balanceOf(msg.sender) < _maxNumberOfPiecesPerAddress, "You have already minted the max number of pieces per address.");
 
     _tokenIds.increment();
     uint256 newId = _tokenIds.current();
