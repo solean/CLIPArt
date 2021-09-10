@@ -21,9 +21,10 @@ contract CLIPArt is ERC721URIStorage {
     return "http://localhost:8080/test/";
   }
 
-  function paint(/*string memory paintPrompt*/) public returns (uint256) {
+  function paint(/*string memory paintPrompt*/) public payable returns (uint256) {
     require(_tokenIds.current() < _maxNumberOfPieces, "All pieces have already been minted.");
     require(balanceOf(msg.sender) < _maxNumberOfPiecesPerAddress, "You have already minted the max number of pieces per address.");
+    require(msg.value >= 0.1 ether, "You did not send enough ether to interest the painter. Please send at least 0.1 ether.");
 
     _tokenIds.increment();
     uint256 newId = _tokenIds.current();
