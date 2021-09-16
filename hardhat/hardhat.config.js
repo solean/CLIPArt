@@ -12,8 +12,6 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 });
 
 
-//const RINKEBY_PRIVATE_KEY = '2333ea062ec0d5dde3d0a950bfb977c85f4b94a3656ab822b0c92dc5f4ee6d94';
-
 module.exports = {
   solidity: "0.8.4",
   networks: {

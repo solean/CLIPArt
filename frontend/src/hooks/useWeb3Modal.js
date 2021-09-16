@@ -8,12 +8,12 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 // const INFURA_ID = "INVALID_INFURA_KEY";
 
 const NETWORK_NAME = "rinkeby";
-const ALCHEMY_API_KEY = "FW8jDUxRH9FTnQ1uleWA6JaiccrG4fa_";
 
 function useWeb3Modal(config = {}) {
   const [provider, setProvider] = useState();
   const [autoLoaded, setAutoLoaded] = useState(false);
   const { autoLoad = true, /* infuraId = INFURA_ID, */ NETWORK = NETWORK_NAME } = config;
+  const alchemyApiKey = process.env.REACT_APP_ALCHEMY_API_KEY;
 
   // Web3Modal also supports many other wallets.
   // You can see other options at https://github.com/Web3Modal/web3modal
