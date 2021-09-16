@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import useWeb3Modal from './hooks/useWeb3Modal';
 import { Button, Header, OuterContainer, Input, Title } from './components';
+import FramedArt from './components/FramedArt';
 import { Contract } from '@ethersproject/contracts';
 
 
@@ -51,6 +52,8 @@ function App() {
     }
   }, [provider]);
 
+  const godzillaPainting = process.env.PUBLIC_URL + '/zilla.png';
+
   return (
     <div className="App">
       <Header>
@@ -63,8 +66,7 @@ function App() {
         </div>
       </Header>
       <OuterContainer>
-        <img src={process.env.PUBLIC_URL + '/zilla.png'} width="500" height="500" alt="Godzilla by Monet" />
-        
+        <FramedArt imgSrc={godzillaPainting} imgPrompt={'Godzilla by Monet'} />
       </OuterContainer>
     </div>
   );

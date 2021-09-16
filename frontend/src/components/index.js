@@ -57,3 +57,43 @@ export const Title = styled.div`
   font-weight: bold;
   margin-left: 20px;
 `;
+
+export const FrameContainer = styled.div`
+  width: 714.28px;
+`;
+
+export const Frame = styled.div`
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  background: black;
+  box-shadow: 0 10px 7px -5px rgba(0, 0, 0, 0.3);
+`;
+
+export const FrameMat = styled.div`
+  position: absolute;
+  background: white;
+  top: 2.5%;
+  bottom: 2.5%;
+  left: 2.5%;
+  right: 2.5%;
+  box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5) inset;
+`;
+
+export const Art = styled.div`
+  position: absolute;
+  top: 13.158%;
+  bottom: 13.158%;
+  left: 13.158%;
+  right: 13.158%;
+
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5) inset;
+  }
+`;
